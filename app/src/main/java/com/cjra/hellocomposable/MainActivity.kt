@@ -5,13 +5,18 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,12 +51,32 @@ fun Content() {
         TextComposable(text = "Jetpack")
         SpaceComposable()
         TextComposable(text = "Compose")
+        SpaceComposable()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Circle(color = Color.Red)
+            Circle(color = Color.Blue)
+            Circle(color = Color.Yellow)
+            Circle(color = Color.Green)
+        }
     }
 }
 
 @Composable
 fun SpaceComposable() {
     Spacer(modifier = Modifier.height(5.dp))
+}
+
+@Composable
+fun Circle(color: Color) {
+    Box(
+        modifier = Modifier
+            .size(70.dp)
+            .background(color = color, CircleShape)
+    )
 }
 
 @Composable
