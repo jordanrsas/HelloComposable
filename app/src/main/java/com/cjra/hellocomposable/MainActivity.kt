@@ -8,6 +8,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,8 +20,14 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,9 +56,14 @@ val colorList = listOf(
     Color.Green
 )
 
+const val buttonName = "I like"
+
 @Preview(showBackground = true)
 @Composable
 fun Content() {
+    var likes by remember {
+        mutableIntStateOf(0)
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +86,31 @@ fun Content() {
                 Spacer(modifier = Modifier.width(10.dp))
             }
         }
+        SpaceComposable()
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Button(onClick = {
+                likes++
+            }) {
+                Text(text = buttonName)
+            }
+            Spacer(modifier = Modifier.width(10.dp))
+            Result(likes = likes)
+        }
     }
+}
+
+@Composable
+fun Result(likes: Int) {
+    Text(
+        text = likes.toString(),
+        fontWeight = FontWeight.Bold,
+        fontSize = 50.sp
+    )
 }
 
 @Composable
