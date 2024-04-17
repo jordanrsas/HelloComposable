@@ -5,9 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -25,19 +32,32 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/*
-* Modifiers
-* -Position and Size: width, heigth
-* -Function: click, scroll
-* -Appearance: background, padding, border
-* -listeners: events> onKeyEvent
-* */
-
 @Preview(showBackground = true)
 @Composable
 fun Content() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+            .padding(horizontal = 5.dp)
+    ) {
+        TextComposable(text = "Welcome")
+        SpaceComposable()
+        TextComposable(text = "Jetpack")
+        SpaceComposable()
+        TextComposable(text = "Compose")
+    }
+}
+
+@Composable
+fun SpaceComposable() {
+    Spacer(modifier = Modifier.height(5.dp))
+}
+
+@Composable
+fun TextComposable(text: String) {
     Text(
-        text = "Hello Jetpack Componse",
+        text = text,
         color = Color.Red,
         fontWeight = FontWeight.Bold,
         fontSize = 40.sp,
@@ -45,6 +65,7 @@ fun Content() {
         modifier = Modifier
             .background(Color.Black)
             .padding(horizontal = 30.dp)
+            .fillMaxWidth()
             .clickable {
                 println("Hello Jetpack")
             }
